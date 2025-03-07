@@ -27,7 +27,7 @@ int main() {
                 cin >> matriks1[i][j];
             }
         }
-        cout << endl;
+        cout << "\n";
         for(i = 0; i < 2; i++) {
             for(j = 0; j < 2; j++) {
                 cout << "Masukkan Matriks 2 ordo [" << i+1 << "][" << j+1 << "]: ";
