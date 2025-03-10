@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    //deklarasi variabel
+    // variabel
     double matriks1[2][2], matriks2[2][2], hasil[2][2] = {0}, det;
     int i, j, k, pilih;
 
