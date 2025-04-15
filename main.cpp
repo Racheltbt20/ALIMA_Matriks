@@ -6,7 +6,7 @@ int main() {
     // start deklarasi variabel
     double matriks1[2][2] = {0}, matriks2[2][2] = {0}, invers[2][2] = {0}, hasil[2][2] = {0}, det;
     int i, j, k, opsi, pilmatriks;
-    char ulang, pakaiInputSebelumnya;
+    char ulang, pakaiInputSebelumnya, sisa;
     bool inputLama = false;
     // end deklarasi variabel
 
@@ -18,15 +18,35 @@ int main() {
             cout << "\nMasukkan elemen matriks A: \n";
             for(i = 0; i < 2; i++) {
                 for(j = 0; j < 2; j++) {
-                    cout << "Baris " << i+1 << " Kolom " << j+1 << " = ";
-                    cin >> matriks1[i][j];
+                    while(true) {
+                        cout << "Baris " << i+1 << " Kolom " << j+1 << " = ";
+                        cin >> matriks1[i][j];
+
+                        if(cin.fail() || cin.get(sisa) && !isspace(sisa)) {
+                            cout << "\nInput harus berupa angka!\n";
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                        } else {
+                            break;
+                        }
+                    }
                 }
             }
             cout << "\nMasukkan elemen matriks B: \n";
             for(i = 0; i < 2; i++) {
                 for(j = 0; j < 2; j++) {
-                    cout << "Baris " << i+1 << " Kolom " << j+1 << " = ";
-                    cin >> matriks2[i][j];
+                    while(true) {
+                        cout << "Baris " << i+1 << " Kolom " << j+1 << " = ";
+                        cin >> matriks2[i][j];
+
+                        if(cin.fail() || cin.get(sisa) && !isspace(sisa)) {
+                            cout << "\nInput harus berupa angka!\n";
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                        } else {
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -45,7 +65,7 @@ int main() {
         // end pilih opsi matriks
 
         // start validasi opsi
-        if(cin.fail()) {
+        if(cin.fail() || cin.get(sisa) && !isspace(sisa)) {
             cout << "\nInput harus berupa angka 1 - 6!\n";
             cin.clear();
             cin.ignore(1000, '\n');
@@ -70,31 +90,35 @@ int main() {
                     cout << "|\n";
                 }
             } else if(opsi >= 4 && opsi <= 6) {
-                cout << "Pilih matriks yang diinginkan (1 atau 2): ";
-                cin >> pilmatriks;
-
-                if(cin.fail()) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                } else {
-                    if(pilmatriks == 1) {
-                        cout << "\nMatriks = \n";
-                        for(i = 0; i < 2; i++) {
-                            cout << "| ";
-                            for(j = 0; j < 2; j++) {
-                                    cout << setw(6) << matriks1[i][j] << setw(6);
+                while(true) {
+                    cout << "Pilih matriks yang diinginkan (1 atau 2): ";
+                    cin >> pilmatriks;
+    
+                    if(cin.fail() || cin.get(sisa) && !isspace(sisa)) {
+                        cout << "\nMasukkan pilihan matriks 1 atau 2!\n";
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                    } else {
+                        if(pilmatriks == 1) {
+                            cout << "\nMatriks = \n";
+                            for(i = 0; i < 2; i++) {
+                                cout << "| ";
+                                for(j = 0; j < 2; j++) {
+                                        cout << setw(6) << matriks1[i][j] << setw(6);
+                                }
+                                cout << "|\n";
                             }
-                            cout << "|\n";
-                        }
-                    } else if(pilmatriks == 2) {
-                        cout << "\nMatriks = \n";
-                        for(i = 0; i < 2; i++) {
-                            cout << "| ";
-                            for(j = 0; j < 2; j++) {
-                                    cout << setw(6) << matriks2[i][j] << setw(6);
+                        } else if(pilmatriks == 2) {
+                            cout << "\nMatriks = \n";
+                            for(i = 0; i < 2; i++) {
+                                cout << "| ";
+                                for(j = 0; j < 2; j++) {
+                                        cout << setw(6) << matriks2[i][j] << setw(6);
+                                }
+                                cout << "|\n";
                             }
-                            cout << "|\n";
                         }
+                        break;
                     }
                 }
             }
@@ -240,7 +264,7 @@ int main() {
                     }
                     break;
                 default:
-                    cout << "\nHarap masukkan angka 1 - 5!\n";
+                    cout << "\nHarap masukkan angka 1 - 6!\n";
                     break;
             }
             // end proses perhitungan
@@ -261,5 +285,7 @@ int main() {
         }
     } while (ulang == 'y' || ulang == 'Y');
     
+    cout << "\n===== Terima kasih telah menggunakan program ini ======\n";
+
     return 0;
 }
